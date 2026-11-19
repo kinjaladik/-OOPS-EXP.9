@@ -10,19 +10,20 @@ using namespace std;
 class BankingException : public exception {
     string msg;
 public:
+
     BankingException(string m) : msg(m) {}
-    const char* what() const noexcept override { return msg.c_str(); }
-};
-struct InsufficientFundsException : public BankingException {
-    InsufficientFundsException(double d) : BankingException("Money short by ₹" + to_string(d)) {}
-};
-struct InvalidAmountException : public BankingException {
-    InvalidAmountException(double a) : BankingException("Invalid amount: ₹" + to_string(a)) {}
-};
+    const char* what() const noexcept override { return msg.c_str(); }};
+    
+    struct InsufficientFundsException : public BankingException {
+    InsufficientFundsException(double d) : BankingException("Money short by ₹" + to_string(d)) {}};
+    
+    struct InvalidAmountException : public BankingException {
+    InvalidAmountException(double a) : BankingException("Invalid amount: ₹" + to_string(a)) {}};
 
 class BankAccount {
     double balance;
 public:
+
     BankAccount(double b) : balance(b) {}
     void withdraw(double amt) {
         if (amt <= 0) throw InvalidAmountException(amt);
@@ -32,6 +33,7 @@ public:
     }};
 
 int main() {
+
     BankAccount acc(5000.0);
     try {
         acc.withdraw(8000.0); // Triggers InsufficientFundsException
